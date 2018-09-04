@@ -51,6 +51,22 @@ def poisson_cal():
     e10.grid(row = 16, column = 1)
     e10.insert(10, str(total))
 
+def uniform_cal():
+    lo = float(e11.get())
+    hi = float(e12.get())
+    sz = int(e13.get())
+    global s
+    s = np.random.uniform(lo, hi, sz)
+    np.all(s >= lo)
+    np.all(s < hi)
+    total = 0
+    for add1 in s:
+        total += add1
+    print(total)
+    e14 = Entry(root)
+    e14.grid(row=4, column=9)
+    e14.insert(10, str(total))
+
 def binom_graph():
     plt.plot(x, r, 'o-')
     plt.xlabel('number of success')
@@ -66,12 +82,18 @@ def norm_graph():
              linewidth=2, color='r')
     plt.show()
 
+
 def poisson_graph():
     plt.plot(x, s, 'o-')
     plt.xlabel("no. of events")
     plt.ylabel("probability of success")
     plt.show()
 
+
+def uniform_graph():
+    count, bins, ignored = plt.hist(s, 15, density=True)
+    plt.plot(bins, np.ones_like(bins), linewidth=2, color='r')
+    plt.show()
 
 def delete():
     e.delete(0, END)
@@ -121,6 +143,7 @@ w16 = tk.Label(text = "Enter upper boundary : ", padx = 10, pady = 10).grid(row 
 e12 = Entry(root)
 w17 = tk.Label(text = "Enter size of samples : ", padx = 10, pady = 10).grid(row =3, column = 8, padx = 100, sticky = E)
 e13 = Entry(root)
+w18 = tk.Label(text = "Answer is ", padx = 10, pady = 10).grid(row =4, column = 8, padx = 100, sticky = E)
 
 
 e.grid(row = 1, column =1)
@@ -144,4 +167,7 @@ tk.Button(root, text = "clear", command = delete).grid(row = 6, column = 1, stic
 tk.Button( root, text="Calculate and show graph", command=norm_cal).grid(row=11, column=1, sticky = W)
 tk.Button(root, text = "Calculate", command = poisson_cal).grid(row = 17, column = 0, sticky = W)
 tk.Button(root, text = "Show graph", command = poisson_graph).grid(row = 17, column = 1)
+tk.Button(root, text = "Calculate", command = uniform_cal).grid(row = 5, column = 8)
+tk.Button(root, text = "Show graph", command = uniform_graph).grid(row = 5, column = 9)
+
 root.mainloop()
