@@ -1,1 +1,1 @@
-# binom
+# Probability Distributions
