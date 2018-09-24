@@ -1,10 +1,11 @@
 from scipy.stats import hypergeom
 import matplotlib.pyplot as plt
 import numpy as np
-[M, n, N] = [20, 7,12]
+[M, n, N] = [52, 5,26]
 rv = hypergeom(M, n, N)
-x = np.arange(0, n+1)
+x = np.arange(0, n + 1)
 pmf_dogs = rv.pmf(x)
+print(sum(pmf_dogs))
 print(x)
 print(pmf_dogs)
 fig = plt.figure()

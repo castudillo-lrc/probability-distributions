@@ -3,6 +3,7 @@ from math import *
 import tkinter as tk
 from scipy.stats import binom
 from scipy.stats import poisson
+from scipy.stats import hypergeom
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -67,6 +68,18 @@ def uniform_cal():
     e14.grid(row=4, column=9)
     e14.insert(10, str(total))
 
+def hyper_geom():
+    global j1
+    global pmf_hg
+    N = int(e14.get())
+    n = int(e15.get())
+    k = int(e16.get())
+    rv = hypergeom(N, n, k)
+    j1 = np.arange(0, n + 1)
+    pmf_hg = rv.pmf(j1)
+    print(j1, pmf_hg)
+    hyper_geom_graph()
+
 def binom_graph():
     plt.plot(x, r, 'o-')
     plt.xlabel('number of success')
@@ -94,6 +107,17 @@ def uniform_graph():
     count, bins, ignored = plt.hist(s, 15, density=True)
     plt.plot(bins, np.ones_like(bins), linewidth=2, color='r')
     plt.show()
+
+def hyper_geom_graph():
+    global pmf_hg
+    global j1
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    ax.plot(j1, pmf_hg, 'bo')
+    ax.vlines(j1, 0, pmf_hg, lw=2)
+    ax.set_ylabel('hypergeom PMF')
+    plt.show()
+
 
 def delete():
     e.delete(0, END)
@@ -144,6 +168,15 @@ e12 = Entry(root)
 w17 = tk.Label(text = "Enter size of samples : ", padx = 10, pady = 10).grid(row =3, column = 8, padx = 100, sticky = E)
 e13 = Entry(root)
 w18 = tk.Label(text = "Answer is ", padx = 10, pady = 10).grid(row =4, column = 8, padx = 100, sticky = E)
+w19 = tk.Label(text = "HYPER-GEOMETRIC DISTRIBUTION: ", padx = 10, pady = 10, fg = "red").grid(row = 6, column = 8, padx = 100, sticky = E)
+w20 = tk.Label(text = "total number of objects: ", padx = 10, pady = 10).grid(row = 7, column = 8, padx = 100, sticky = E)
+e14 = Entry(root)
+w21 = tk.Label(text = "enter value of 'n': ", padx = 10, pady = 10).grid(row = 8, column = 8, padx = 100, sticky = E)
+e15 = Entry(root)
+w22 = tk.Label(text = "enter value of 'k': ", padx = 10, pady = 10).grid(row = 9, column = 8, padx = 100, sticky = E)
+e16 = Entry(root)
+
+
 
 
 e.grid(row = 1, column =1)
@@ -158,6 +191,9 @@ e9.grid(row = 15, column = 1)
 e11.grid(row = 1, column = 9)
 e12.grid(row = 2, column = 9)
 e13.grid(row = 3, column = 9)
+e14.grid(row = 7, column = 9)
+e15.grid(row = 8, column = 9)
+e16.grid(row = 9, column = 9)
 
 
 tk.Button( root, text="Calculate", command=binom_cal).grid(row=6, column=0, sticky = W,padx=0)
@@ -169,5 +205,6 @@ tk.Button(root, text = "Calculate", command = poisson_cal).grid(row = 17, column
 tk.Button(root, text = "Show graph", command = poisson_graph).grid(row = 17, column = 1)
 tk.Button(root, text = "Calculate", command = uniform_cal).grid(row = 5, column = 8)
 tk.Button(root, text = "Show graph", command = uniform_graph).grid(row = 5, column = 9)
+tk.Button(root, text = "Calculate and show graph", command = hyper_geom).grid(row = 10, column = 9)
 
 root.mainloop()
