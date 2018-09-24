@@ -1,3 +1,13 @@
+# author: NIHAR MUKHIYA
+# date: 12/09/2018
+# last update: 24/09/2018
+# description: Python GUI implementation of various probability distributions such as,
+#              binomial, normal, poisson, uniform and hyper-geometric,
+#              along with their graphs plotted,
+#              using Tkinter.
+
+
+
 from tkinter import *
 from math import *
 import tkinter as tk
