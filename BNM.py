@@ -125,6 +125,17 @@ def delete():
     e2.delete(0, END)
     e3.delete(0, END)
     e4.delete(0, END)
+    e5.delete(0, END)
+    e6.delete(0, END)
+    e7.delete(0, END)
+    e8.delete(0, END)
+    e9.delete(0, END)
+    e11.delete(0, END)
+    e12.delete(0, END)
+    e13.delete(0, END)
+    e14.delete(0, END)
+    e15.delete(0, END)
+    e16.delete(0, END)
 
 
 root = tk.Tk()
